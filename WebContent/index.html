@@ -5,12 +5,26 @@
 <title>StartWevApp3</title>
 </head>
 <body>
- HTML版　ようこそJavaWebの世界へ
+ HTML版　ようこそJavaWebの世界へ<br>
 
-<form  method="POST" action="StartServlet">
-	<input type="submit" value="次の世界へ">
+<form  method="POST" action="ENDServlet">
+	<input type="submit" value="END"><br><br>
 </form>
 
+<form  method="POST" action="REGISTServlet">
+	ID<input type="text" name="registId"><br>
+	NAME<input type="text" name="registName"><br>
+	<input type="submit" value="REGIST"><br><br>
+</form>
+
+<form  method="POST" action="LISTOUTServlet">
+	<input type="submit" value="LISTOUT"><br><br>
+</form>
+
+<form  method="POST" action="SEARCHServlet">
+	ID<input type="text" name="searchId"><br>
+	<input type="submit" value="SEARCH"><br><br>
+</form>
 
 </body>
 </html>
