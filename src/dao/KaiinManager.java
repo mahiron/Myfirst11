@@ -19,29 +19,38 @@ public class KaiinManager {
 
 	private static final String KAIINNLIST_SQL =
 			"select "
-					+ "   kaiin.kaiinNo"
-					+ "  ,kaiin.name"
-					+ "  ,kaiin.registDate"
-					+ " from "
-					+ "   kaiin ";
+					+ "   id "
+					+ "  ,name "
+					+ "  ,date "
+					+ "  ,sex "
+					+ "from   "
+					+ "   member ";
 
 	private static final String KAIINN_SQL =
 			"select "
-					+ "   kaiin.kaiinNo "
-					+ "  ,kaiin.name "
-					+ "  ,kaiin.registDate "
+					+ "   id "
+					+ "  ,name "
+					+ "  ,date "
+					+ "  ,sex "
 					+ "from   "
-					+ "   kaiin "
+					+ "   member "
 					+ "WHERE "
-					+ " kaiinno = ?";
+					+ " id = ? ";
 
 	private static final String REGIIST_SQL =
-			"insert into kaiin "
-					+ " (kaiinno "
-					+ ",name "
-					+ ",registDate) "
-					+ "values "
-					+ " (?,?,?) ";
+			"insert " +
+			"into member( " +
+			"	id, " +
+			"    name ," +
+			"    date, " +
+			"    sex " +
+			") " +
+			"values (" +
+			"	?, " +
+			"    ?, " +
+			"    ?, " +
+			"    ? " +
+			")";
 
 	public void doRegist(KaiinVo kaiin) {
 		PreparedStatement stmt = null;
@@ -53,6 +62,7 @@ public class KaiinManager {
 			stmt.setInt(1,kaiin.getId());
 			stmt.setString(2,kaiin.getName());
 			stmt.setDate(3,kaiin.getDate());
+			stmt.setString(4, kaiin.getSex().toString());
 
 			stmt.executeUpdate();
 		}catch(SQLException e) {
@@ -78,6 +88,7 @@ public class KaiinManager {
 				bean.setId(rset.getInt(1));
 				bean.setName(rset.getString(2));
 				bean.setDate(rset.getDate(3));
+				bean.setSex(rset.getString(4));
 				bean.setMessege("検索しました");
 			}
 		}catch(SQLException e) {

@@ -2,27 +2,44 @@ package vo;
 
 import java.sql.Date;
 
+import domain.Sex;
+
 public class KaiinVo
 {
 	private int id;
 	private String name;
 	private Date date;
+	private Sex sex;
 
 
-	public KaiinVo(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.date = new Date(new java.util.Date().getTime());
+	public domain.Sex getSex() {
+		return sex;
 	}
 
 
 
-	public KaiinVo(int id, String name, Date date) {
+	public void setSex(domain.Sex sex) {
+		this.sex = sex;
+	}
+
+
+
+	public KaiinVo(int id, String name, Sex sex) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.date = new Date(new java.util.Date().getTime());
+		this.sex = sex;
+	}
+
+
+
+	public KaiinVo(int id, String name, Date date, Sex sex) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.date = date;
+		this.sex = sex;
 	}
 
 
@@ -45,9 +62,14 @@ public class KaiinVo
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+
+
 	@Override
 	public String toString() {
-		return "KaiinVo [id=" + id + ", name=" + name + ", date=" + date + "]";
+		return "KaiinVo [id=" + id + ", name=" + name + ", date=" + date + ", sex=" + sex + "]";
 	}
+
+
 
 }

@@ -6,11 +6,12 @@ import java.sql.SQLException;
 import bean.RegistBean;
 import bean.SearchBean;
 import dao.Dao;
+import domain.Sex;
 import vo.KaiinVo;
 
 public class KaiinService {
-	public static RegistBean doRegist(int id, String name) throws ClassNotFoundException, SQLException {
-		KaiinVo kaiin = new KaiinVo(id, name);
+	public static RegistBean doRegist(int id, String name, Sex sex) throws ClassNotFoundException, SQLException {
+		KaiinVo kaiin = new KaiinVo(id, name, sex);
 		Connection connection = Dao.getConnection();
 		dao.KaiinManager kaiinManager = new dao.KaiinManager(connection);
 		kaiinManager.doRegist(kaiin);

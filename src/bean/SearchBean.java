@@ -2,12 +2,31 @@ package bean;
 
 import java.sql.Date;
 
+import domain.Sex;
+
 public class SearchBean
 {
 	private int id;
 	private String messege;
 	private String name;
 	private Date date;
+	private Sex sex;
+
+	public Sex getSex() {
+		return sex;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+
+	public void setSex(String sex) {
+		if(sex.equals("Man")) {
+			this.sex = Sex.Man;
+		}else {
+			this.sex = Sex.Woman;
+		}
+	}
 
 	public SearchBean()
 	{
@@ -40,10 +59,14 @@ public class SearchBean
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	@Override
 	public String toString() {
-		return "KaiinVo [id=" + id + ", name=" + name + ", date=" + date + "]";
+		return "SearchBean [id=" + id + ", messege=" + messege + ", name=" + name + ", date=" + date + ", sex=" + sex
+				+ "]";
 	}
+
+
 
 }
 

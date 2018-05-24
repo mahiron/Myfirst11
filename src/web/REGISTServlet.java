@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.RegistBean;
+import domain.Sex;
 
 
 
@@ -28,12 +29,18 @@ public class REGISTServlet extends HttpServlet {
 		String idstr = request.getParameter("registId");
 		int id = Integer.parseInt(idstr);
 		String name = request.getParameter("registName");
-
+		String sexstr = request.getParameter("registSex");
+		Sex sex;
+		if(sexstr.equals("Man")) {
+			sex = Sex.Man;
+		}else {
+			sex = Sex.Woman;
+		}
 
 
 		RegistBean regist;
 		try {
-			regist = service.KaiinService.doRegist(id, name);
+			regist = service.KaiinService.doRegist(id, name, sex);
 			request.setAttribute("bean", regist);
 			RequestDispatcher disp = request.getRequestDispatcher("/REGIST.jsp");
 			disp.forward(request, response);

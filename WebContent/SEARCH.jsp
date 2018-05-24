@@ -12,6 +12,7 @@
 ID=<%=bean.getId() %><br>
 NAME=<%=bean.getName() %><br>
 DATE=<%=bean.getDate().toString() %><br>
+SEX=<%=bean.getSex().toString() %><br>
 <form  method="POST" action="index.html">
 	<input type="submit" value="戻る"><br><br>
 </form>
