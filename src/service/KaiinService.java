@@ -24,6 +24,9 @@ public class KaiinService
             if(kaiinManager.doRegist(kaiin))
             {
                 RegistBean bean = new RegistBean();
+                ListoutBean list  = doList();
+                bean.setList(list);
+
                 return bean;
             }
             RegistBean bean = new RegistBean();

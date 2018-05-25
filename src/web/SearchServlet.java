@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.ErrorBean;
 import bean.SearchBean;
 
 
@@ -26,17 +27,33 @@ public class SearchServlet extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String idstr = request.getParameter("searchId");
-        int id = Integer.parseInt(idstr);
-        SearchBean bean;
-        bean = service.KaiinService.doSearch(id);
-        if(bean.getName() != null) {
-            request.setAttribute("bean", bean);
-            RequestDispatcher disp = request.getRequestDispatcher("/search.jsp");
-            disp.forward(request, response);
+        try
+        {
+            String idstr = request.getParameter("searchId");
+            int id = Integer.parseInt(idstr);
+            SearchBean bean;
+            bean = service.KaiinService.doSearch(id);
+            if (bean.getName() != null)
+            {
+                request.setAttribute("bean", bean);
+                RequestDispatcher disp = request.getRequestDispatcher("/search.jsp");
+                disp.forward(request, response);
+            }
+            else
+            {
+                ErrorBean erbean = new ErrorBean();
+                erbean.setMessege("そのIDは存在しません");
+                request.setAttribute("bean", erbean);
+                RequestDispatcher disp = request.getRequestDispatcher("/error.jsp");
+                disp.forward(request, response);
+            }
         }
-        else {
-            RequestDispatcher disp = request.getRequestDispatcher("/notsearch.jsp");
+        catch (NumberFormatException e)
+        {
+            ErrorBean erbean = new ErrorBean();
+            erbean.setMessege("正しく入力してください");
+            request.setAttribute("bean", erbean);
+            RequestDispatcher disp = request.getRequestDispatcher("/error.jsp");
             disp.forward(request, response);
         }
 
