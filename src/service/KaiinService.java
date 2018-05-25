@@ -3,13 +3,14 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import bean.ListoutBean;
 import bean.RegistBean;
 import bean.SearchBean;
 import dao.Dao;
 import domain.Sex;
 import vo.KaiinVo;
 
-public class KaiinService 
+public class KaiinService
 {
 	public static RegistBean doRegist(int id, String name, Sex sex)
 	{
@@ -45,5 +46,22 @@ public class KaiinService
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	public static ListoutBean doList()
+	{
+		try(
+				Connection connection = Dao.getConnection();
+			)
+
+		{
+			dao.KaiinManager kaiinManager = new dao.KaiinManager(connection);
+			ListoutBean bean = kaiinManager.doList();
+			return bean;
+		}
+		catch(SQLException | ClassNotFoundException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 }

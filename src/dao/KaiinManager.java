@@ -110,7 +110,7 @@ public class KaiinManager
 			/* Statementの作成 */
 			stmt = this.connection.prepareStatement(KAIINNLIST_SQL);
 
-			stmt.executeQuery();
+			rset = stmt.executeQuery();
 
 			while(rset.next())
 			{

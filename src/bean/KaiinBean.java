@@ -26,11 +26,14 @@ public class KaiinBean
 	}
 
 	public void setSex(String sex) {
+		this.sex = Sex.valueOf(sex);
+		/*
 		if(sex.equals("Man")) {
 			this.sex = Sex.Man;
 		}else {
 			this.sex = Sex.Woman;
 		}
+		*/
 	}
 
 	public int getId() {
