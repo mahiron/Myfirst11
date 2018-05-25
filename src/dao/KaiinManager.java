@@ -4,15 +4,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import bean.KaiinBean;
+import bean.ListoutBean;
 import bean.SearchBean;
 import vo.KaiinVo;
 
-public class KaiinManager {
+public class KaiinManager
+{
 
 	private Connection connection;
 
-	public KaiinManager(Connection connection) {
+	public KaiinManager(Connection connection)
+	{
 		super();
 		this.connection = connection;
 	}
@@ -52,9 +58,9 @@ public class KaiinManager {
 			"    ? " +
 			")";
 
-	public void doRegist(KaiinVo kaiin) {
+	public void doRegist(KaiinVo kaiin) throws SQLException
+	{
 		PreparedStatement stmt = null;
-		try{
 
 			/* Statementの作成 */
 			stmt = this.connection.prepareStatement(REGIIST_SQL);
@@ -65,16 +71,13 @@ public class KaiinManager {
 			stmt.setString(4, kaiin.getSex().toString());
 
 			stmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public SearchBean doSearch(int id) {
+	public SearchBean doSearch(int id) throws SQLException
+	{
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		SearchBean bean = new SearchBean();
-		try{
 
 			/* Statementの作成 */
 			stmt = this.connection.prepareStatement(KAIINN_SQL);
@@ -84,16 +87,43 @@ public class KaiinManager {
 			rset = stmt.executeQuery();
 
 
-			while(rset.next()) {
+			while(rset.next())
+			{
 				bean.setId(rset.getInt(1));
 				bean.setName(rset.getString(2));
 				bean.setDate(rset.getDate(3));
 				bean.setSex(rset.getString(4));
 				bean.setMessege("検索しました");
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
+
+		return bean;
+	}
+
+	public ListoutBean doList()throws SQLException
+	{
+
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		ListoutBean bean = new ListoutBean();
+		List<KaiinBean> list = new ArrayList<KaiinBean>();
+
+			/* Statementの作成 */
+			stmt = this.connection.prepareStatement(KAIINNLIST_SQL);
+
+			stmt.executeQuery();
+
+			while(rset.next())
+			{
+				KaiinBean kaiin = new KaiinBean();
+
+				kaiin.setId(rset.getInt(1));
+				kaiin.setName(rset.getString(2));
+				kaiin.setDate(rset.getDate(3));
+				kaiin.setSex(rset.getString(4));
+
+				list.add(kaiin);
+			}
+		bean.setList(list);
 		return bean;
 	}
 }

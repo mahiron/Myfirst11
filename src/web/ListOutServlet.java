@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet("/LISTOUTServlet")
-public class LISTOUTServlet extends HttpServlet {
+@WebServlet("/ListOutServlet")
+public class ListOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public LISTOUTServlet() {
+    public ListOutServlet() {
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher disp = request.getRequestDispatcher("/LISTOUT.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/listout.jsp");
 		disp.forward(request, response);
 	}
 
