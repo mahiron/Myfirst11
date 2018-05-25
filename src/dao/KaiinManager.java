@@ -94,6 +94,7 @@ public class KaiinManager
 				bean.setDate(rset.getDate(3));
 				bean.setSex(rset.getString(4));
 				bean.setMessege("検索しました");
+				
 			}
 
 		return bean;
