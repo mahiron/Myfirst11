@@ -16,7 +16,7 @@ import bean.SearchBean;
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet
 {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public SearchServlet()
     {
@@ -24,22 +24,28 @@ public class SearchServlet extends HttpServlet
     }
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		String idstr = request.getParameter("searchId");
-		int id = Integer.parseInt(idstr);
-		SearchBean bean;
-		bean = service.KaiinService.doSearch(id);
-		request.setAttribute("bean", bean);
-		RequestDispatcher disp = request.getRequestDispatcher("/search.jsp");
-		disp.forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        String idstr = request.getParameter("searchId");
+        int id = Integer.parseInt(idstr);
+        SearchBean bean;
+        bean = service.KaiinService.doSearch(id);
+        if(bean.getName() != null) {
+            request.setAttribute("bean", bean);
+            RequestDispatcher disp = request.getRequestDispatcher("/search.jsp");
+            disp.forward(request, response);
+        }
+        else {
+            RequestDispatcher disp = request.getRequestDispatcher("/notsearch.jsp");
+            disp.forward(request, response);
+        }
 
-	}
+    }
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		doGet(request, response);
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        doGet(request, response);
+    }
 
 }
